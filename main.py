@@ -5,7 +5,9 @@
 
 import cv2
 import numpy
+
 # successfully imported, cv2 and numpy
+
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
