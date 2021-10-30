@@ -5,6 +5,7 @@
 
 import cv2
 import numpy
+# successfully imported, cv2 and numpy
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -15,4 +16,4 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# this is just a testing message
