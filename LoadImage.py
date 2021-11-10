@@ -1,4 +1,4 @@
-import cv2
+from cv2 import cv2
 import numpy as np
 
 def draw_circle(event, x, y, flags, param):

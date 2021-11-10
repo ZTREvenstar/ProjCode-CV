@@ -1,4 +1,4 @@
-import cv2
+from cv2 import cv2
 capture = cv2.VideoCapture(0)
 capture_usb = cv2.VideoCapture(1)
 

@@ -1,5 +1,6 @@
 import numpy as np
-import cv2
+from cv2 import cv2
+
 
 img = cv2.imread('Water-pause-times.png',0)
 img = cv2.resize(img,None,fx=0.5,fy=0.5,interpolation=cv2.INTER_CUBIC)
