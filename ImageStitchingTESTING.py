@@ -30,7 +30,7 @@ def experiment(mode="camerapose only"):
     kp1, des1 = orb.detectAndCompute(img1_3, None)
     kp2, des2 = orb.detectAndCompute(img2_3, None)
 
-    # visualize keypoints. show and store
+    # visualize key-points. show and store
     img_kp1 = cv.drawKeypoints(img1_3, kp1, None)
     img_kp2 = cv.drawKeypoints(img2_3, kp2, None)
     time = t.strftime("%m-%d-%H-%M", t.localtime())  # record the time for experiment convenicence
