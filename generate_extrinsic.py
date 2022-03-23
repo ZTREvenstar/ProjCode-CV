@@ -12,9 +12,13 @@ def generate_extrinsic():
     """
 
     """ SOME GLOBAL PARAMETERS """
-    src = 'IMINPUT/iden1.jpg'
-    des = 'IMINPUT/iden2.jpg'
     visualize_img = True
+
+    '''CONTROL TEST SET'''
+    TESTSET = [['IMINPUT/iden1.jpg', 'IMINPUT/iden2.jpg']]  # case1: two almost identical images
+
+    src = TESTSET[0][0]
+    des = TESTSET[0][1]
 
     img1 = cv.imread(src, 1)  # query image
     img2 = cv.imread(des, 1)  # train image
@@ -51,7 +55,7 @@ def generate_extrinsic():
     print("Translation is: ")
     print(MT)
 
-    print("!!!!!")
+    print("!!!!! Is using degree")
     # convert extrinsic matrix to Euler angle for debugging.
     print(rot_to_Euler(MR))
 

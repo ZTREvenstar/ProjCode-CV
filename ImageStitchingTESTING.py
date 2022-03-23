@@ -9,8 +9,11 @@ import time as t
 def experiment(mode="camerapose only"):
 
     GOOD_POINTS_LIMITED = 0.999
-    src = 'IMINPUT/im3.1.jpg'
-    des = 'IMINPUT/im3.2.jpg'
+    TESTSET = [['IMINPUT/im3.1.jpg', 'IMINPUT/im3.2.jpg']]  # for control test images.
+                                                            # case1: two almost identical images
+
+    src = TESTSET[0][0]
+    des = TESTSET[0][1]
 
     img1_3 = cv.imread(src, 1)  # query image
     img2_3 = cv.imread(des, 1)  # train image
