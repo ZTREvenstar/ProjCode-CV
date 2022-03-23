@@ -4,8 +4,8 @@ from matplotlib import pyplot as plt
 import matplotlib.gridspec as gridspec
 
 GOOD_POINTS_LIMITED = 0.99
-src = 'img005.jpg'
-des = 'img006.jpg'
+src = 'IMINPUT/img005.jpg'
+des = 'IMINPUT/img006.jpg'
 
 img1_3 = cv.imread(src, 1)  # 基准图像
 img2_3 = cv.imread(des, 1)  # 拼接图像
