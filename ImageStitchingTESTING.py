@@ -9,16 +9,16 @@ import time as t
 def experiment(mode="camerapose only"):
 
     GOOD_POINTS_LIMITED = 0.999
-    src = 'IMINPUT/img005.jpg'
-    des = 'IMINPUT/img006.jpg'
+    src = 'IMINPUT/im3.1.jpg'
+    des = 'IMINPUT/im3.2.jpg'
 
     img1_3 = cv.imread(src, 1)  # query image
     img2_3 = cv.imread(des, 1)  # train image
 
     # control possible resize
     RESIZE_FACTOR = 1.00
-    # img1_3 = cv.resize(img1_3, None, fx=RESIZE_FACTOR, fy=RESIZE_FACTOR)
-    # img2_3 = cv.resize(img2_3, None, fx=RESIZE_FACTOR, fy=RESIZE_FACTOR)
+    img1_3 = cv.resize(img1_3, None, fx=RESIZE_FACTOR, fy=RESIZE_FACTOR)
+    img2_3 = cv.resize(img2_3, None, fx=RESIZE_FACTOR, fy=RESIZE_FACTOR)
 
     orb = cv.ORB_create()  # ORB algorithm combines FAST and BRIEF
 
@@ -108,7 +108,14 @@ def experiment(mode="camerapose only"):
     use 8-point algorithm
     '''
     extrinsic = cv.findFundamentalMat(src_pts[0:8], dst_pts[0:8], cv.FM_8POINT)
+    print(extrinsic)
 
+    _, MR, MT, _ = cv.recoverPose(extrinsic[0], src_pts[0:20], dst_pts[0:20])  # output 4 things: retval, R, t, mask
+    # MR, MT are the transform from src to dst.
+    print("Rotation is: ")
+    print(MR)
+    print("Translation is: ")
+    print(MT)
 
     if mode != "camerapose only":
         h1, w1, p1 = img2_3.shape  # p: 通道数量
