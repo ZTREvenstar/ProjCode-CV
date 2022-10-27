@@ -18,10 +18,13 @@ def generate_extrinsic():
     visualize_img = True
 
     '''CONTROL TEST SET'''
-    TESTSET = [['IMINPUT/iden1.jpg', 'IMINPUT/iden2.jpg']]  # case1: two almost identical images
-
-    src = TESTSET[0][0]
-    des = TESTSET[0][1]
+    TESTSET = [['IMINPUT/cameralyy/img301.jpg', 'IMINPUT/cameralyy/img302.jpg'],  # case1: two almost identical images
+               ['IMINPUT/cameralyy/img100.jpg', 'IMINPUT/cameralyy/img101.jpg'],
+               ['IMINPUT/cameralyy/img200.jpg', 'IMINPUT/cameralyy/img201.jpg']]
+    casenumber = 2
+    c = casenumber
+    src = TESTSET[c][0]
+    des = TESTSET[c][1]
 
     img1 = cv.imread(src, 1)  # query image
     img2 = cv.imread(des, 1)  # train image
@@ -35,22 +38,18 @@ def generate_extrinsic():
     src_pts, dst_pts = extract_feature(img1, img2,
                                        RESIZE_FACTOR=RESIZE_FACTOR, whether_visualize=visualize_img)
 
-    ''' calculate the homography '''
-    M, _ = cv.findHomography(dst_pts, src_pts, cv.RANSAC, ransacReprojThreshold=5.0)
     '''
-    M is the homography matrix
-    new config, the last parameter relates to algorithm details 
-    WHAT IS mask? is the mask of outliers and inliers?
-    ------ mask size equals to goodpoints size -----
+    calculate the camera transformation matrix, 
+    which is the extrinsic parameter
+    use prepared camera intrinsic parameter
     '''
+    CAMERA_INTRINSIC = np.array([[602.17662119, 0,            398.42312748],
+                                [0,            603.03231857, 296.42790604],
+                                [0,            0,            1]])
+    E, _ = cv.findEssentialMat(src_pts[0:8], dst_pts[0:8], CAMERA_INTRINSIC, cv.RANSAC)
+    print("essential matrix is", E)
 
-    '''
-    calculate the camera transformation matrix, which is just extrinsic parameter
-    use 8-point algorithm
-    '''
     F, _ = cv.findFundamentalMat(src_pts[0:8], dst_pts[0:8], cv.FM_8POINT)
-    print(F)
-
     '''
     Draw epipolar lines according to matched points
     for debugging
@@ -74,7 +73,9 @@ def generate_extrinsic():
         plt.show()
 
     '''======================== RECIVER POSE ================================'''
-    _, MR, MT, _ = cv.recoverPose(F, src_pts[0:20], dst_pts[0:20])  # output 4 things: retval, R, t, mask
+    # Essential matrix.    ---> need to know intrinsic parameter
+    # Fundamental matrix.
+    _, MR, MT, _ = cv.recoverPose(E, src_pts[0:20], dst_pts[0:20])  # output 4 things: retval, R, t, mask
     # MR, MT are the transform from src to dst.
     print("Rotation is: ")
     print(MR)

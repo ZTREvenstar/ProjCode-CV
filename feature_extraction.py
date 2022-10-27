@@ -68,7 +68,8 @@ def extract_feature(img1, img2, RESIZE_FACTOR=1, whether_visualize=False):
     # drawMatches作用是绘制匹配线
     # cv.imshow("THIS IS img3", img3)
     if whether_visualize:
-        plt.imshow(img3), plt.show()
+        temp = cv.cvtColor(img3, cv.COLOR_BGR2RGB)
+        plt.imshow(temp), plt.show()
     cv.imwrite(
         "./IMGOUTPUT/show_match_newconfig_" + "gplim=" + str(GOOD_POINTS_LIMITED) + "_ResizeF=" + str(RESIZE_FACTOR)
         + ".jpg", img3)

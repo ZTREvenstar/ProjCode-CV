@@ -6,20 +6,17 @@
 """JUST FOR TESTING USE"""
 
 import generate_extrinsic
+from homography_stitching import stitching_by_homography
+
 import numpy as np
 import math
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    print('Hi, PyCharm')
 
-    generate_extrinsic.generate_extrinsic()
+    # generate_extrinsic.generate_extrinsic()
+    stitching_by_homography()
 
     # M1 = np.array([[0, -1, 0],   # (rotate 90 along z axis)
     #                [1, 0, 0],
